@@ -264,5 +264,11 @@
     "url": "https://cnsuntek.com/wp-content/uploads/2022/06/HC-940Pro-LI-Manual.pdf",
     "origin": "Suntek brand site",
     "error": "ReadTimeout"
+  },
+  {
+    "title": "Suntek HT-001 — копия руководства",
+    "url": "https://manuals.plus/m/147279f3d8b443022d6c8617f40a3f0dd9c5df212b72b8053f8426955d305794.pdf",
+    "origin": "Стороннее зеркало Manuals+; не официальный сайт производителя",
+    "error": "HTTPError"
   }
 ]
