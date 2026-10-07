@@ -1,0 +1,303 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Словарь терминов · Фотоловушка LoRa</title><meta name="description" content="Подробное инженерное руководство: сборка фотоловушки ESP32-CAM с передачей JPEG через LoRa.">
+<meta name="theme-color" content="#254e3a"><meta property="og:title" content="Словарь терминов · Фотоловушка LoRa"><meta property="og:description" content="Подробное инженерное руководство: сборка фотоловушки ESP32-CAM с передачей JPEG через LoRa."><meta property="og:type" content="website"><meta property="og:image" content="https://wwwparser.github.io/fotolovushka-lora-3km/assets/concept.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="learning.css"><script src="app.js" defer></script><script src="learning.js" defer></script></head><body><a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top"><div class="wrap top-inner"><a class="brand" href="index.html" aria-label="Фотоловушка LoRa — главная">
+<svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="6" width="26" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="17" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V3h12v3M24 10h2" stroke="currentColor" stroke-width="1.5"/></svg>
+<div>Фотоловушка LoRa<span>ПОЛЕВОЙ СПРАВОЧНИК / 01</span></div></a>
+<button class="menu" type="button" aria-expanded="false" aria-controls="navigation">Меню</button>
+<nav class="nav" id="navigation" aria-label="Главная навигация"><a href="basics.html">С нуля</a><a href="components.html">Детали</a><a href="case.html">Корпус</a><a href="cameras.html">Готовые камеры</a><a href="guide.html">Сборка</a><a class="repo" href="https://github.com/wwwparser/fotolovushka-lora-3km" target="_blank" rel="noopener">GitHub</a></nav></div></header><main id="main"><div class="page-intro"><div class="wrap"><div class="eyebrow">Проект v0.2 · справочник</div><h1>Словарь терминов</h1><p>Первый образец: одна камера и приёмник на базе. Практические шаги, расчёты и ограничения проекта.</p><button type="button" class="print">Печать / сохранить PDF</button></div></div>
+<div class="wrap reader"><aside class="toc-panel" aria-label="Оглавление"><h2>На этой странице</h2><div class="toc">
+<ul>
+<li><a href="#_1">Электроника и питание</a></li>
+<li><a href="#_2">Камера и данные</a></li>
+<li><a href="#_3">Радио</a></li>
+<li><a href="#_4">Корпус и печать</a></li>
+</ul>
+</div>
+</aside><article class="prose"><h2 id="_1">Электроника и питание</h2>
+<div class="table-scroll" tabindex="0" aria-label="Таблица: прокрутка по горизонтали"><table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Значение в этом проекте</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MCU, микроконтроллер</td>
+<td>Маленький компьютер на плате, выполняющий прошивку</td>
+</tr>
+<tr>
+<td>Прошивка</td>
+<td>Программа, которую записывают в память ESP32</td>
+</tr>
+<tr>
+<td>GPIO</td>
+<td>Программируемый сигнальный вывод контроллера</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Общий провод, относительно которого измеряют напряжение</td>
+</tr>
+<tr>
+<td>В / А / Вт</td>
+<td>Вольты — напряжение, амперы — ток, ватты — мощность</td>
+</tr>
+<tr>
+<td>мА·ч</td>
+<td>Ёмкость батареи при её собственном напряжении</td>
+</tr>
+<tr>
+<td>Вт·ч</td>
+<td>Энергия; удобнее для сравнения батарей с разным напряжением</td>
+</tr>
+<tr>
+<td>18650</td>
+<td>Формат цилиндрической ячейки; защита может увеличить длину</td>
+</tr>
+<tr>
+<td>1S / 2S / 2P</td>
+<td>Одна ячейка последовательно / две последовательно / две параллельно; в MVP одна ячейка</td>
+</tr>
+<tr>
+<td>DC/DC, boost</td>
+<td>Преобразователь постоянного напряжения; boost повышает его</td>
+</tr>
+<tr>
+<td>MOSFET</td>
+<td>Транзистор, используемый здесь как электронный выключатель</td>
+</tr>
+<tr>
+<td>High-side</td>
+<td>Ключ в плюсовом проводе питания</td>
+</tr>
+<tr>
+<td>SOT-23</td>
+<td>Очень маленький корпус детали с тремя выводами; нужен переходник для ручной сборки</td>
+</tr>
+<tr>
+<td>Подтяжка</td>
+<td>Резистор, задающий известный уровень сигнала, когда его никто не переключает</td>
+</tr>
+<tr>
+<td>Конденсатор</td>
+<td>Небольшой местный запас заряда, сглаживающий короткие провалы питания</td>
+</tr>
+<tr>
+<td>PSRAM</td>
+<td>Дополнительная оперативная память для буферов изображения</td>
+</tr>
+<tr>
+<td>Deep sleep</td>
+<td>Режим глубокого сна контроллера; вся отладочная плата может потреблять больше самого чипа</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_2">Камера и данные</h2>
+<div class="table-scroll" tabindex="0" aria-label="Таблица: прокрутка по горизонтали"><table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PIR</td>
+<td>Пассивный датчик изменения теплового излучения; не камера</td>
+</tr>
+<tr>
+<td>NoIR</td>
+<td>Камера без блокировки ближнего инфракрасного света; совместимость шлейфа отдельно проверяется</td>
+</tr>
+<tr>
+<td>ИК, 850 нм</td>
+<td>Подсветка невидимым/слабо видимым ближним ИК-светом; не то же излучение, которое воспринимает PIR</td>
+</tr>
+<tr>
+<td>JPEG</td>
+<td>Сжатый файл фотографии; размер зависит от сцены и качества</td>
+</tr>
+<tr>
+<td>160×120</td>
+<td>19 200 пикселей; маленькая радиопревью-картинка, не снимок для распознавания лица</td>
+</tr>
+<tr>
+<td>КиБ</td>
+<td>1024 байта; 5 КиБ = 5120 байт</td>
+</tr>
+<tr>
+<td>UART</td>
+<td>Последовательная передача по TX/RX</td>
+</tr>
+<tr>
+<td>SPI</td>
+<td>Синхронная шина с тактом и выбором устройства</td>
+</tr>
+<tr>
+<td>I²C</td>
+<td>Двухпроводная шина, здесь для часов</td>
+</tr>
+<tr>
+<td>RTC / UTC</td>
+<td>Часы реального времени / единое время, не зависящее от часового пояса</td>
+</tr>
+<tr>
+<td>SD / microSD</td>
+<td>Карта памяти двух размеров; электрические режимы и файловая система тоже важны</td>
+</tr>
+<tr>
+<td>FAT32</td>
+<td>Способ организации файлов на карте; два независимых владельца не должны менять его одновременно</td>
+</tr>
+<tr>
+<td>USB host / device</td>
+<td>Ведущий / подключённое устройство; два USB-устройства обычным кабелем не образуют связь</td>
+</tr>
+<tr>
+<td>MSC / PTP</td>
+<td>USB-доступ к накопителю / протокол получения фотографий; требуют разных драйверов</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_3">Радио</h2>
+<div class="table-scroll" tabindex="0" aria-label="Таблица: прокрутка по горизонтали"><table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LoRa</td>
+<td>Способ радиопередачи небольших объёмов данных</td>
+</tr>
+<tr>
+<td>LoRaWAN</td>
+<td>Сетевой протокол поверх LoRa; этот MVP его не использует</td>
+</tr>
+<tr>
+<td>868 МГц</td>
+<td>Частотный диапазон оборудования, не автоматическое разрешение любой передачи</td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Spreading factor: настройка с компромиссом между временем передачи и работой слабого канала</td>
+</tr>
+<tr>
+<td>BW</td>
+<td>Ширина радиоканала; в расчёте 125 кГц</td>
+</tr>
+<tr>
+<td>CR</td>
+<td>Кодирование для исправления части ошибок; в расчёте 4/5</td>
+</tr>
+<tr>
+<td>ACK</td>
+<td>Подтверждение приёма фрагмента</td>
+</tr>
+<tr>
+<td>CRC</td>
+<td>Контрольная сумма для обнаружения повреждения данных</td>
+</tr>
+<tr>
+<td>Duty cycle</td>
+<td>Доля времени, занятого собственной передачей</td>
+</tr>
+<tr>
+<td>RSSI / SNR</td>
+<td>Оценка уровня сигнала / отношения полезного сигнала к шуму</td>
+</tr>
+<tr>
+<td>dBm</td>
+<td>Мощность относительно 1 мВт; 10 dBm = 10 мВт</td>
+</tr>
+<tr>
+<td>dBi</td>
+<td>Усиление антенны относительно идеального изотропного источника</td>
+</tr>
+<tr>
+<td>ЭИМ, EIRP</td>
+<td>Эквивалентная изотропно излучаемая мощность, учитывающая антенну и потери кабеля</td>
+</tr>
+<tr>
+<td>SMA / RP-SMA</td>
+<td>Похожие разъёмы с разной комбинацией центральных контактов</td>
+</tr>
+<tr>
+<td>Пигтейл</td>
+<td>Короткий коаксиальный кабель от платы к антенному разъёму</td>
+</tr>
+<tr>
+<td>50 Ом</td>
+<td>Волновое сопротивление радиотракта</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="_4">Корпус и печать</h2>
+<div class="table-scroll" tabindex="0" aria-label="Таблица: прокрутка по горизонтали"><table>
+<thead>
+<tr>
+<th>Термин</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAD</td>
+<td>Проектирование точной трёхмерной геометрии</td>
+</tr>
+<tr>
+<td>STEP</td>
+<td>Обменный формат CAD, удобный для дальнейшего редактирования</td>
+</tr>
+<tr>
+<td>STL</td>
+<td>Поверхность из треугольников; используется слайсером, единицы в этом проекте — мм</td>
+</tr>
+<tr>
+<td>Слайсер</td>
+<td>Программа, превращающая модель в движения конкретного принтера</td>
+</tr>
+<tr>
+<td>G-code</td>
+<td>Команды принтеру; готовятся под его модель и материал, универсальный файл не выдаётся</td>
+</tr>
+<tr>
+<td>FDM</td>
+<td>Послойная печать расплавленной пластиковой нитью</td>
+</tr>
+<tr>
+<td>PETG / ASA / TPU</td>
+<td>Жёсткий пластик для прототипа / материал с устойчивостью к наружной среде / гибкий материал для пробной прокладки</td>
+</tr>
+<tr>
+<td>Периметры</td>
+<td>Количество линий стенки при печати</td>
+</tr>
+<tr>
+<td>Infill</td>
+<td>Заполнение внутреннего объёма; не заменяет толщину стенки</td>
+</tr>
+<tr>
+<td>Brim</td>
+<td>Дополнительный край первого слоя против отрыва от стола</td>
+</tr>
+<tr>
+<td>Допуск</td>
+<td>Разрешённое отклонение размера; для отверстий сначала печатают пробник</td>
+</tr>
+<tr>
+<td>Термовставка</td>
+<td>Металлическая резьбовая втулка, устанавливаемая нагревом в пластик</td>
+</tr>
+<tr>
+<td>IP</td>
+<td>Класс защиты проверенного изделия; закрытая STL-сетка не доказывает защиту от воды</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="basics.html">С нуля</a> · <a href="components.html">Детали</a> · <a href="case.html">Корпус</a> · <a href="retrofit.html">Доработка готовой камеры</a></p></article></div></main>
+<footer><div class="wrap footer-inner"><p>Фотоловушка LoRa · инженерный проект v0.2<br>Материалы и цены: 7 октября 2026 года.</p><p><a href="validation.html">Статус проверок</a> · <a href="https://github.com/wwwparser/fotolovushka-lora-3km">Исходники на GitHub</a><br>Радиотрасса, ночная съёмка и автономность требуют испытаний.</p></div></footer></body></html>

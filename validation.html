@@ -1,13 +1,18 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Что проверено · Фотоловушка LoRa</title><meta name="description" content="Подробное инженерное руководство: сборка фотоловушки ESP32-CAM с передачей JPEG через LoRa.">
 <meta name="theme-color" content="#254e3a"><meta property="og:title" content="Что проверено · Фотоловушка LoRa"><meta property="og:description" content="Подробное инженерное руководство: сборка фотоловушки ESP32-CAM с передачей JPEG через LoRa."><meta property="og:type" content="website"><meta property="og:image" content="https://wwwparser.github.io/fotolovushka-lora-3km/assets/concept.png">
-<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body><a class="skip" href="#main">Перейти к содержанию</a>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="learning.css"><script src="app.js" defer></script><script src="learning.js" defer></script></head><body><a class="skip" href="#main">Перейти к содержанию</a>
 <header class="top"><div class="wrap top-inner"><a class="brand" href="index.html" aria-label="Фотоловушка LoRa — главная">
 <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="6" width="26" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="17" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V3h12v3M24 10h2" stroke="currentColor" stroke-width="1.5"/></svg>
 <div>Фотоловушка LoRa<span>ПОЛЕВОЙ СПРАВОЧНИК / 01</span></div></a>
 <button class="menu" type="button" aria-expanded="false" aria-controls="navigation">Меню</button>
-<nav class="nav" id="navigation" aria-label="Главная навигация"><a href="guide.html">Руководство</a><a href="index.html#bom">Комплектующие</a><a href="index.html#scheme">Схема</a><a href="index.html#downloads">Файлы</a><a class="repo" href="https://github.com/wwwparser/fotolovushka-lora-3km" target="_blank" rel="noopener">GitHub</a></nav></div></header><main id="main"><div class="page-intro"><div class="wrap"><div class="eyebrow">Проект v0.1 · справочник</div><h1>Что проверено</h1><p>Первый образец: одна камера и приёмник на базе. Практические шаги, расчёты и ограничения проекта.</p><button type="button" class="print">Печать / сохранить PDF</button></div></div>
-<div class="wrap reader"><aside class="toc-panel" aria-label="Оглавление"><h2>На этой странице</h2><p>Все разделы на этой странице.</p></aside><article class="prose"><p>Выполненные проверки относятся к программному прототипу без радиожелеза.</p>
+<nav class="nav" id="navigation" aria-label="Главная навигация"><a href="basics.html">С нуля</a><a href="components.html">Детали</a><a href="case.html">Корпус</a><a href="cameras.html">Готовые камеры</a><a href="guide.html">Сборка</a><a class="repo" href="https://github.com/wwwparser/fotolovushka-lora-3km" target="_blank" rel="noopener">GitHub</a></nav></div></header><main id="main"><div class="page-intro"><div class="wrap"><div class="eyebrow">Проект v0.2 · справочник</div><h1>Что проверено</h1><p>Первый образец: одна камера и приёмник на базе. Практические шаги, расчёты и ограничения проекта.</p><button type="button" class="print">Печать / сохранить PDF</button></div></div>
+<div class="wrap reader"><aside class="toc-panel" aria-label="Оглавление"><h2>На этой странице</h2><div class="toc">
+<ul>
+<li><a href="#v02">Дополнение v0.2: учебные ветки и корпус</a></li>
+</ul>
+</div>
+</aside><article class="prose"><p>Выполненные проверки относятся к программному прототипу без радиожелеза.</p>
 <ul>
 <li>9 unittest-проверок: повторный запуск демо с новым ID, бинарный заголовок/ACK, четыре независимых поста с перемешанными фрагментами, повторные пакеты, продолжение после закрытия/повторного открытия SQLite, конфликт метаданных/дублей, повреждённый CRC и восстановление, некорректные поля, отказ не-JPEG, SMTP TLS-вызов/вложение через mock и ошибка пустых настроек. Это 9 тестовых методов, часть проверяет несколько сценариев.</li>
 <li>Демо: исходный тестовый JPEG 2268 байт, 12 фрагментов, потери каждого DATA и ACK с вероятностью 0.2, seed7. 25 попыток, полученный JPEG идентичен исходному; реальных SMTP/RF вызовов нет.</li>
@@ -18,10 +23,17 @@
 <li>Концепт создан встроенным image_gen; визуально проверен и скопирован в assets/concept.png. Это иллюстрация: показанный аккумуляторный блок не является схемой соединения ячеек; электрический MVP — одна 1S ячейка. Точный промпт в assets/concept-prompt.txt.</li>
 <li>Архитектурная SVG-схема отрисована в Chrome, сохранена также в assets/architecture.png и визуально проверена. Относительные ссылки документов проверены, отсутствующих файлов нет.</li>
 </ul>
-<p>Не проверено: компиляция Arduino/PlatformIO (SDK/компилятор не установлены), реальная работа камеры/ключей/RTC/PIR/радио, поле 3 км, сон/автономность, настоящая доставка SMTP, STL-экспорт/посадки/печать, герметичность, совместимый NoIR, текущие регуляторные условия конкретной установки, синхронная работа четырёх радиопостов. Прототип не считать готовым серийным устройством.</p>
+<h2 id="v02">Дополнение v0.2: учебные ветки и корпус</h2>
+<ul>
+<li>Добавлены 2 теста подготовки JPEG готовой камеры: оригинал сохраняется, повреждённый файл отклоняется, превью не превышает 5 КиБ, повторный импорт не дублирует очередь. Всего 11 тестов прошли. Это работа с завершёнными файлами, не драйвер совместного доступа к SD.</li>
+<li>Созданы 10 валидных CAD-деталей и экспортированы STL/STEP. STL замкнуты; у шести жёстких деталей сборки не найдено объёмных пересечений. Покупные модули и провода не проходили проверку посадок. Реальные рендеры и отчёты доступны в <a href="case.html">разделе корпуса</a>.</li>
+<li>Исследованы 143 карточки Ozon/WB: 17 аксессуаров исключены, именованные предложения сведены в 57 групп, 35 неизвестных OEM выделены отдельно. Для 10 кандидатов указаны способы проверки доработки. WB-цены не подтверждены; статические карточки и фотографии получены напрямую после поиска через XMLRiver. Нет подтверждённых испытаний совместимости с LoRa.</li>
+<li>Сайт проверен на 360/768/1440 пикселей: поиск деталей, фильтры камер, 3D-просмотр, смета, калькулятор и ссылки. Обновлённая иллюстрация остаётся концептом; точные размеры задаёт CAD.</li>
+</ul>
+<p>Не проверено: компиляция Arduino/PlatformIO (SDK/компилятор не установлены), реальная работа камеры/ключей/RTC/PIR/радио, поле 3 км, сон/автономность, настоящая доставка SMTP, посадки реальных модулей/печать, герметичность, совместимый NoIR, USB/Wi-Fi/SD-интеграция готовой фотоловушки, текущие регуляторные условия конкретной установки, синхронная работа четырёх радиопостов. Прототип не считать готовым серийным устройством.</p>
 <p>Повторить:</p>
 <pre><code class="language-powershell">python -m unittest discover -s tests -v
 python -m src.cli demo --loss 0.2
 python scripts/calculations.py
 </code></pre></article></div></main>
-<footer><div class="wrap footer-inner"><p>Фотоловушка LoRa · инженерный проект v0.1<br>Материалы и цены: 7 октября 2026 года.</p><p><a href="validation.html">Статус проверок</a> · <a href="https://github.com/wwwparser/fotolovushka-lora-3km">Исходники на GitHub</a><br>Радиотрасса, ночная съёмка и автономность требуют испытаний.</p></div></footer></body></html>
+<footer><div class="wrap footer-inner"><p>Фотоловушка LoRa · инженерный проект v0.2<br>Материалы и цены: 7 октября 2026 года.</p><p><a href="validation.html">Статус проверок</a> · <a href="https://github.com/wwwparser/fotolovushka-lora-3km">Исходники на GitHub</a><br>Радиотрасса, ночная съёмка и автономность требуют испытаний.</p></div></footer></body></html>

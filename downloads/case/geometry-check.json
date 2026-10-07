@@ -1,0 +1,112 @@
+{
+  "body": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 13444,
+    "dimensions_mm": [
+      130.0,
+      190.0,
+      70.0
+    ],
+    "volume_cm3": 292.77
+  },
+  "lid": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 9224,
+    "dimensions_mm": [
+      130.0,
+      190.0,
+      4.01
+    ],
+    "volume_cm3": 87.56
+  },
+  "tray": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 9036,
+    "dimensions_mm": [
+      114.0,
+      174.0,
+      3.0
+    ],
+    "volume_cm3": 56.52
+  },
+  "camera_baffle": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 1512,
+    "dimensions_mm": [
+      34.01,
+      34.0,
+      17.01
+    ],
+    "volume_cm3": 3.26
+  },
+  "ir_retainer": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 768,
+    "dimensions_mm": [
+      106.0,
+      36.0,
+      3.0
+    ],
+    "volume_cm3": 4.66
+  },
+  "camera_carrier": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 3160,
+    "dimensions_mm": [
+      60.0,
+      52.0,
+      3.01
+    ],
+    "volume_cm3": 7.83
+  },
+  "rain_hood": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 20,
+    "dimensions_mm": [
+      70.0,
+      22.0,
+      16.0
+    ],
+    "volume_cm3": 7.35
+  },
+  "strap_bridge": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 1044,
+    "dimensions_mm": [
+      12.0,
+      70.0,
+      8.0
+    ],
+    "volume_cm3": 3.81
+  },
+  "gasket_trial": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 1056,
+    "dimensions_mm": [
+      128.4,
+      188.4,
+      1.8
+    ],
+    "volume_cm3": 2.67
+  },
+  "fit_coupon": {
+    "solid_valid": true,
+    "watertight": true,
+    "triangles": 2552,
+    "dimensions_mm": [
+      56.0,
+      28.0,
+      4.0
+    ],
+    "volume_cm3": 5.43
+  }
+}

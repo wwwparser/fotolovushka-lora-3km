@@ -1,0 +1,32 @@
+{
+  "units": "mm",
+  "case": [
+    130.0,
+    190.0,
+    74.0
+  ],
+  "body_depth": 70.0,
+  "wall": 4.0,
+  "lid": 4.0,
+  "camera_xy": [
+    65.0,
+    153.0
+  ],
+  "pir_xy": [
+    65.0,
+    108.0
+  ],
+  "ir_xy": [
+    65.0,
+    55.0
+  ],
+  "inner_clear_box": [
+    122.0,
+    182.0,
+    66.0
+  ],
+  "insert_pilot_mm": 4.6,
+  "sma_hole_mm": 6.5,
+  "pg7_hole_mm": 13.2,
+  "status": "geometry checked; physical fit, print, seal and purchased-board dimensions unverified"
+}
