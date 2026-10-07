@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wwwparser.github.io/fotolovushka-lora-3km/sitemap.xml

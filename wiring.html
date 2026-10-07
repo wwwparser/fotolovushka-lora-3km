@@ -1,0 +1,128 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Электрические соединения · Фотоловушка LoRa</title><meta name="description" content="Подробное инженерное руководство: сборка фотоловушки ESP32-CAM с передачей JPEG через LoRa.">
+<meta name="theme-color" content="#254e3a"><meta property="og:title" content="Электрические соединения · Фотоловушка LoRa"><meta property="og:description" content="Подробное инженерное руководство: сборка фотоловушки ESP32-CAM с передачей JPEG через LoRa."><meta property="og:type" content="website"><meta property="og:image" content="https://wwwparser.github.io/fotolovushka-lora-3km/assets/concept.png">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body><a class="skip" href="#main">Перейти к содержанию</a>
+<header class="top"><div class="wrap top-inner"><a class="brand" href="index.html" aria-label="Фотоловушка LoRa — главная">
+<svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect x="3" y="6" width="26" height="22" rx="3" stroke="currentColor" stroke-width="1.5"/><circle cx="16" cy="17" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V3h12v3M24 10h2" stroke="currentColor" stroke-width="1.5"/></svg>
+<div>Фотоловушка LoRa<span>ПОЛЕВОЙ СПРАВОЧНИК / 01</span></div></a>
+<button class="menu" type="button" aria-expanded="false" aria-controls="navigation">Меню</button>
+<nav class="nav" id="navigation" aria-label="Главная навигация"><a href="guide.html">Руководство</a><a href="index.html#bom">Комплектующие</a><a href="index.html#scheme">Схема</a><a href="index.html#downloads">Файлы</a><a class="repo" href="https://github.com/wwwparser/fotolovushka-lora-3km" target="_blank" rel="noopener">GitHub</a></nav></div></header><main id="main"><div class="page-intro"><div class="wrap"><div class="eyebrow">Проект v0.1 · справочник</div><h1>Электрические соединения</h1><p>Первый образец: одна камера и приёмник на базе. Практические шаги, расчёты и ограничения проекта.</p><button type="button" class="print">Печать / сохранить PDF</button></div></div>
+<div class="wrap reader"><aside class="toc-panel" aria-label="Оглавление"><h2>На этой странице</h2><div class="toc">
+<ul>
+<li><a href="#_1">Узел: два контроллера</a></li>
+<li><a href="#_2">Питание</a></li>
+<li><a href="#_3">База</a></li>
+<li><a href="#esp32-cam">Загрузка ESP32-CAM</a></li>
+</ul>
+</div>
+</aside><article class="prose"><p>Это схема соединений для макетной сборки; не изготовленные PCB/Gerber. Цвета и GPIO на сгенерированной иллюстрации не являются схемой. Перед подачей питания прозвонить реальные платы и проверить даташиты приобретённых деталей.</p>
+<h2 id="_1">Узел: два контроллера</h2>
+<p>ESP32-CAM — именно AI Thinker ESP32-CAM с PSRAM. Второй контроллер — обычный ESP32-WROOM DevKit с доступными GPIO ниже. Не переносить эту распиновку на ESP32-S3. SD-карта и Wi-Fi камеры в MVP не используются.</p>
+<div class="table-scroll" tabindex="0" aria-label="Таблица: прокрутка по горизонтали"><table>
+<thead>
+<tr>
+<th>ESP32 радиоконтроллер</th>
+<th>Куда</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPIO18</td>
+<td>RFM95W SCK</td>
+<td>SPI</td>
+</tr>
+<tr>
+<td>GPIO19</td>
+<td>RFM95W MISO</td>
+<td>SPI</td>
+</tr>
+<tr>
+<td>GPIO23</td>
+<td>RFM95W MOSI</td>
+<td>SPI</td>
+</tr>
+<tr>
+<td>GPIO5</td>
+<td>RFM95W NSS/CS</td>
+<td>Страп-пин: исключить внешнюю сильную подтяжку вниз на старте</td>
+</tr>
+<tr>
+<td>GPIO14</td>
+<td>RFM95W RESET</td>
+<td></td>
+</tr>
+<tr>
+<td>GPIO26</td>
+<td>RFM95W DIO0</td>
+<td></td>
+</tr>
+<tr>
+<td>3V3</td>
+<td>RFM95W VCC</td>
+<td>Только 3.3 В, не 5 В; 10 мкФ + 100 нФ у модуля</td>
+</tr>
+<tr>
+<td>GPIO33</td>
+<td>AM312 OUT</td>
+<td>RTC GPIO, пробуждение HIGH; выход &lt;=3.3 В</td>
+</tr>
+<tr>
+<td>3V3/GND</td>
+<td>AM312 VCC/GND</td>
+<td>Проверить маркировку экземпляра</td>
+</tr>
+<tr>
+<td>GPIO16 (UART RX2)</td>
+<td>ESP32-CAM U0T/GPIO1 через 1 кОм</td>
+<td>Только камера → радио</td>
+</tr>
+<tr>
+<td>GPIO17 (UART TX2)</td>
+<td>Не подключён</td>
+<td>Исключает подпитку выключенной камеры через RX</td>
+</tr>
+<tr>
+<td>GPIO32</td>
+<td>База 2N3904 через 1 кОм</td>
+<td>Включает питание камеры через P-MOSFET</td>
+</tr>
+<tr>
+<td>GPIO25</td>
+<td>Затвор AO3400 через 100 Ом</td>
+<td>Включает ИК LED; 100 кОм gate–GND</td>
+</tr>
+<tr>
+<td>GPIO21</td>
+<td>DS3231 SDA</td>
+<td>Подтяжка к 3.3 В</td>
+</tr>
+<tr>
+<td>GPIO22</td>
+<td>DS3231 SCL</td>
+<td>Подтяжка к 3.3 В</td>
+</tr>
+<tr>
+<td>3V3/GND</td>
+<td>DS3231 VCC/GND</td>
+<td>Без опасной зарядки CR2032</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>Общая земля всех блоков</td>
+<td>Не разрывать землю камеры ключом</td>
+</tr>
+</tbody>
+</table></div>
+<p>У RFM95W шаг выводов 2 мм: нужны переходная плата либо аккуратная пайка короткими проводами. Антенну подключить к ANT и GND через 50-омный коаксиал. Частоту/согласование антенны подтвердить. Не включать передатчик без антенны. Одноимённые GPIO камерной платы и радиоплаты — разные физические платы.</p>
+<h2 id="_2">Питание</h2>
+<p>Одна защищённая ячейка 18650 → предохранитель 2 А → выключатель → boost 5 В → DevKit 5V/VIN, ключ камеры и ИК-ветви. Земля общая. Полярность держателя и достаточную длину под защищённую ячейку проверить заранее. Расчётный пик по линии 5 В до 1.2–1.5 А: ток батареи может превысить 2 А при 3.2 В; измерить пусковой ток, при необходимости пересчитать предохранитель и токовую защиту. Надпись «2 А» на boost часто относится к ключу, а не к гарантированному выходному току.</p>
+<p>DevKit обычно имеет собственный стабилизатор 3.3 В. RF требует стабильного питания с запасом порядка 150 мА дополнительно к ESP32; если питание проседает, ставить отдельный стабилизатор 3.3 В с достаточным током и учитывать его ток покоя. Конденсаторы 470 мкФ у входа камеры и у 5 В нагрузки, 100 нФ/10 мкФ у радио. Не соединять внешние 5 В и USB-питание DevKit без проверки схемы платы.</p>
+<p>Ключ камеры: AO3401 source → +5 В; drain → ESP32-CAM 5V; gate → +5 В через 100 кОм; gate → collector 2N3904; emitter → GND; base ← GPIO32 через 1 кОм; base → GND через 100 кОм. HIGH GPIO32 включает камеру. SOT23 паять на переходник, цоколёвку обоих транзисторов взять из их паспортов. Подтяжки обязательны: после сброса камера и ИК должны быть выключены.</p>
+<p>ИК: три параллельные ветви, в каждой +5 В → резистор 18 Ом 2 Вт → анод LED 850 нм → катод на drain AO3400. Source AO3400 → GND, gate ← GPIO25 через 100 Ом, gate → GND через 100 кОм. При Vf=1.5–2 В ток одной ветви около 167–194 мА; рассеиваемая мощность резистора 0.5–0.7 Вт. Это расчёт, а не паспорт купленного LED: сначала измерить ток одной ветви и температуру, затем подключить остальные. LED на радиаторах. Не подключать LED к GPIO напрямую. Для дальности больше нескольких метров нужен проверенный осветитель и перерасчёт питания.</p>
+<p>TP4056 в MVP используется только для USB-зарядки, когда нагрузка выключена. Зарядный ток задаётся по паспорту ячейки. В полевых условиях предпочтительнее съёмная батарея и отдельное зарядное устройство. Для солнечного варианта потребуется отдельная проверенная схема с power-path, защитой и запретом заряда на морозе; в этой версии она не реализована.</p>
+<h2 id="_3">База</h2>
+<p>Второй DevKit + второй RFM95W: SPI/RESET/DIO0 как в таблице. DevKit по USB к ПК/мини-ПК базы, где работает Python. RF питание 3.3 В. Постоянное питание базы от USB; интернет ПК через Wi-Fi/кабель. Raspberry Pi возможен как замена ПК без изменения USB-протокола, покупать его для MVP необязательно.</p>
+<h2 id="esp32-cam">Загрузка ESP32-CAM</h2>
+<p>Отдельный источник 5 В достаточного тока; USB-TTL с логикой TX 3.3 В: TX → U0R, RX ← U0T, GND общий. На время прошивки GPIO0 → GND, затем reset; после прошивки убрать перемычку GPIO0 и reset. Линию U0T к радиоконтроллеру при прошивке отключить. Маленький 3.3 В выход USB-TTL не использовать как питание камеры. При установленной USB-плате ESP32-CAM-MB проверить, что она не подпитывает отключённую камеру.</p></article></div></main>
+<footer><div class="wrap footer-inner"><p>Фотоловушка LoRa · инженерный проект v0.1<br>Материалы и цены: 7 октября 2026 года.</p><p><a href="validation.html">Статус проверок</a> · <a href="https://github.com/wwwparser/fotolovushka-lora-3km">Исходники на GitHub</a><br>Радиотрасса, ночная съёмка и автономность требуют испытаний.</p></div></footer></body></html>
