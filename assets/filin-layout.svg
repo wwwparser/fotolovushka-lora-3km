@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670">
+<rect width="1200" height="670" fill="#f5f4ec"/><g font-family="Segoe UI, sans-serif" fill="#233d33">
+<text x="45" y="52" font-size="29">Ветка C · корпус «Филина», наша электроника</text><text x="45" y="85" font-size="17">Схема зон и соединений. Геометрия донора определяется обмером.</text>
+<rect x="45" y="125" width="310" height="400" rx="24" fill="#d6dbd1" stroke="#58665d" stroke-width="3"/>
+<text x="72" y="159" font-size="19">Передняя половина</text>
+<rect x="120" y="185" width="155" height="105" rx="10" fill="#eef1e9" stroke="#58665d"/>
+<circle cx="198" cy="235" r="27" fill="#25382e"/><circle cx="198" cy="235" r="16" fill="#608094"/>
+<text x="75" y="312" font-size="17">Камера за окном + чёрная трубка</text>
+<circle cx="198" cy="359" r="23" fill="#edf0e9" stroke="#58665d"/>
+<text x="75" y="403" font-size="17">Новый PIR в сменном адаптере</text>
+<rect x="94" y="427" width="207" height="62" rx="9" fill="#354238"/>
+<g fill="#8fabb7"><circle cx="143" cy="457" r="17"/><circle cx="198" cy="457" r="17"/><circle cx="253" cy="457" r="17"/></g>
+<rect x="423" y="125" width="340" height="400" rx="24" fill="#d6dbd1" stroke="#58665d" stroke-width="3"/>
+<text x="445" y="159" font-size="19">Задняя половина / пластина</text>
+<rect x="453" y="185" width="93" height="200" rx="5" fill="#315841"/>
+<rect x="469" y="204" width="61" height="75" fill="#aab4a5"/><text x="464" y="310" font-size="16" fill="white">ESP32</text><text x="463" y="333" font-size="15" fill="white">DevKit</text>
+<rect x="566" y="190" width="91" height="90" rx="5" fill="#49653a"/><text x="575" y="233" font-size="15" fill="white">RFM95W</text><text x="582" y="258" font-size="14" fill="white">868</text>
+<rect x="566" y="302" width="91" height="83" rx="5" fill="#647d88"/><text x="576" y="333" font-size="14" fill="white">RTC /</text><text x="576" y="357" font-size="14" fill="white">питание</text>
+<rect x="680" y="185" width="53" height="200" rx="14" fill="#3a657e"/><text x="705" y="403" text-anchor="middle" font-size="13">18650</text>
+<text x="445" y="442" font-size="15">Часы и ключи — в свободном объёме</text><text x="445" y="468" font-size="15">Все реальные размеры сверить!</text>
+<path d="M355 238H423" stroke="#a77734" stroke-width="4"/><text x="363" y="222" font-size="14">UART</text>
+<path d="M355 361H423" stroke="#a77734" stroke-width="4"/><text x="364" y="348" font-size="14">GPIO</text>
+<path d="M355 455H423" stroke="#a77734" stroke-width="4"/><text x="367" y="490" font-size="14">Ключ ИК</text>
+<path d="M612 190V111H788V229" fill="none" stroke="#58665d" stroke-width="4"/><text x="775" y="151" font-size="15">Антенна</text><text x="775" y="174" font-size="15">868 МГц</text>
+<path d="M800 285Q850 250 900 285M800 305Q850 270 900 305" fill="none" stroke="#a77734" stroke-width="3"/>
+<rect x="907" y="213" width="250" height="172" rx="14" fill="#e6ece1" stroke="#58665d"/><text x="932" y="248" font-size="19">Прежняя база</text><text x="932" y="281" font-size="16">RFM95W + ESP32</text><text x="932" y="311" font-size="16">USB → ПК → письмо</text><text x="932" y="342" font-size="15">Параметры радио одинаковы</text>
+<text x="45" y="566" font-size="19">Питание: 1×18650 → предохранитель → выключатель → проверенные 5 В</text>
+<text x="45" y="600" font-size="17">Заводскую плату снять. Старые AA-контакты изолировать. Логика и радио — 3,3 В.</text>
+<text x="45" y="633" font-size="17">Первый JPEG: 160×120, цель около 5 КиБ. Дальность и ночь подтверждаются испытаниями.</text>
+</g></svg>
